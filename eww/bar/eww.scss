@@ -1,0 +1,27 @@
+* {
+  all: unset;
+}
+
+.barRight{
+    background-color: transparent;
+}
+
+.workspaces {
+  button {
+    background-color: transparent;
+    border: 1px solid transparent;
+
+    &.isActive{
+      background-color: grey;
+    }
+
+    &:hover{
+      border-color: white;
+    }
+
+  }
+
+  image {
+    background-color: transparent;
+  }
+}

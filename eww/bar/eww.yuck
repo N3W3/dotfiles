@@ -1,0 +1,90 @@
+;;-----------------Variables-----------------
+
+;; Date time H:M
+(defpoll time :interval "5s" "date +%H:%M")
+
+;; Workspaces actives on différents monitors
+(defvar workspacesRight "" )
+(defvar workspacesLeft "" )
+
+;;-----------------Widgets Monitors-----------------
+
+(defwidget workspacesMonitor0 []
+    (literal :content workspacesRight))
+
+(defwidget workspacesMonitor1 []
+    (literal :content workspacesLeft))
+
+;;-----------------Widgets Time-----------------
+
+(defwidget dateTime []
+    (box :class "time"
+    (label :text time)))
+
+;;-----------------Wigets Recherche-----------------
+
+
+;;-----------------Wigets -----------------
+
+;;-----------------Wigets LetfBars-----------------
+
+(defwidget leftBarMonitor0 []
+  (box
+    :class "left"
+    :valign "start"
+    :halign "start"
+    (workspacesMonitor0)))
+
+(defwidget leftBarMonitor1 []
+  (box
+    :class "left"
+    :valign "start"
+    :halign "start"
+    (workspacesMonitor1)))
+
+;;-----------------Widget CenterBar-----------------
+(defwidget centerBar []
+  (box
+    :class "center"
+    :valign "center"
+    :halign "center"
+    :hexpand true
+    :vhexpand false
+    (dateTime)))
+
+;;-----------------Widget RigthBar-----------------
+
+;;-----------------Windows Monitors-----------------
+(defwindow barMonitor0
+           :monitor 0
+           :geometry (geometry :x "0%"
+                               :y "5px"
+                               :width "95%"
+                               :height "30px"
+                               :anchor "top center")
+           :stacking "fg"
+           :reserve (struts :distance "40px" :side "top")
+           :wm-ignore false
+           :exclusive true
+           (box
+           :orientation "h"
+           :space-evenly false
+                         (leftBarMonitor0)
+                         (centerBar)))
+
+(defwindow barMonitor1
+           :monitor 1
+           :geometry (geometry :x "0%"
+                               :y "5px"
+                               :width "95%"
+                               :height "30px"
+                               :anchor "top center")
+           :stacking "fg"
+           :reserve (struts :distance "40px" :side "top")
+           :wm-ignore false
+           :exclusive true
+           (box
+           :orientation "h"
+           :space-evenly false
+                         (leftBarMonitor1)
+                         (centerBar)))
