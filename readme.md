@@ -2,9 +2,9 @@
 Actually in developpemnt
 
 ## Doom Emacs 
-[wiki]{https://docs.doomemacs.org/latest/}
+[github](https://github.com/doomemacs/doomemacs) - [wiki](https://docs.doomemacs.org/latest/)
 
 ## hyprland 
-[wiki]{https://wiki.hyprland.org/}
+[github](https://github.com/hyprwm/Hyprland) - [wiki](https://wiki.hyprland.org/)
 ## eww 
-[wiki]{https://elkowar.github.io/eww/eww.html}
+[github](https://github.com/elkowar/eww) - [wiki](https://elkowar.github.io/eww/eww.html)
