@@ -15,76 +15,93 @@
 (defwidget workspacesMonitor1 []
     (literal :content workspacesLeft))
 
-;;-----------------Widgets Time-----------------
+;;-----------------Widget Time-----------------
 
 (defwidget dateTime []
     (box :class "time"
     (label :text time)))
 
-;;-----------------Wigets Recherche-----------------
+;;-----------------Widgets Recherche-----------------
 
 
-;;-----------------Wigets -----------------
+;;-----------------Widgets -----------------
 
-;;-----------------Wigets LetfBars-----------------
+;;-----------------Widgets LetfBars-----------------
 
 (defwidget leftBarMonitor0 []
   (box
     :class "left"
-    :valign "start"
-    :halign "start"
     (workspacesMonitor0)))
 
 (defwidget leftBarMonitor1 []
   (box
     :class "left"
-    :valign "start"
-    :halign "start"
     (workspacesMonitor1)))
 
 ;;-----------------Widget CenterBar-----------------
 (defwidget centerBar []
   (box
     :class "center"
-    :valign "center"
-    :halign "center"
-    :hexpand true
-    :vhexpand false
     (dateTime)))
 
 ;;-----------------Widget RigthBar-----------------
 
+(defwidget rightBar []
+  (box
+    :class "right"
+    ))
+
+;;-----------------Widget bar-----------------
+
+(defwidget bar0 []
+    (box :class "bar-widget" :orientation "h" :space-evenly true
+
+        (box :orientation "h" :space-evenly false :halign "start"
+            (leftBarMonitor0)
+        )
+
+        (box :orientation "h" :space-evenly false :halign "center"
+            (dateTime)
+        )
+
+        (box :orientation "h" :space-evenly false :halign "end"
+        )
+
+    )
+
+)
+
+(defwidget bar1 []
+    (box :class "bar-widget" :orientation "h" :space-evenly true
+
+        (box :orientation "h" :space-evenly false :halign "start"
+            (leftBarMonitor1)
+        )
+
+        (box :orientation "h" :space-evenly false :halign "center"
+            (dateTime)
+        )
+
+        (box :orientation "h" :space-evenly false :halign "end"
+        )
+
+    )
+
+)
 ;;-----------------Windows Monitors-----------------
 (defwindow barMonitor0
            :monitor 0
-           :geometry (geometry :x "0%"
-                               :y "5px"
-                               :width "95%"
-                               :height "30px"
+           :geometry (geometry :width "100%"
+                               :height "24px"
                                :anchor "top center")
-           :stacking "fg"
-           :reserve (struts :distance "40px" :side "top")
-           :wm-ignore false
            :exclusive true
-           (box
-           :orientation "h"
-           :space-evenly false
-                         (leftBarMonitor0)
-                         (centerBar)))
-
+           (bar0)
+)
 (defwindow barMonitor1
            :monitor 1
-           :geometry (geometry :x "0%"
-                               :y "5px"
-                               :width "95%"
-                               :height "30px"
+           :geometry (geometry :width "100%"
+                               :height "24px"
                                :anchor "top center")
-           :stacking "fg"
-           :reserve (struts :distance "40px" :side "top")
-           :wm-ignore false
            :exclusive true
-           (box
-           :orientation "h"
-           :space-evenly false
-                         (leftBarMonitor1)
-                         (centerBar)))
+           (bar1)
+)

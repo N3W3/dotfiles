@@ -30,7 +30,7 @@ workspaces() {
 
     done
 
-    echo "(box :class \"workspaces\" :halign \"center\" :valign \"center\" :vexpand true :hexpand true $buf)"
+    echo "(box :class \"workspaces\" :space-evenly false :hexpand true $buf)"
 }
 
 workspaces "$1"
