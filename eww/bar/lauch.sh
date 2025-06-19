@@ -13,7 +13,8 @@ fi
 run_eww() {
 	${EWW} --config "$C" open-many \
         barMonitor0 \
-        barMonitor1
+        barMonitor1 &&
+    ~/.config/eww/bar/scripts/update_workspaces.sh
 }
 
 ## Launch or close widgets accordingly
