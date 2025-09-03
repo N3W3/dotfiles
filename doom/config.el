@@ -14,3 +14,20 @@
 ;; Load latex config 
 (setq +latex-viewers '(zathura))
 
+;; Use XeLaTeX as the default LaTeX compiler
+(after! latex
+  ;; Tell AUCTeX to use xelatex by default
+  (setq TeX-engine 'xetex
+        TeX-command-default "XeLaTeX")
+
+  ;; Add xelatex to the command list if not already there
+  (add-to-list 'TeX-command-list
+               '("XeLaTeX"
+                 "xelatex -interaction=nonstopmode %s"
+                 TeX-run-TeX nil t
+                 :help "Run XeLaTeX")))
+
+;; Auto-compile LaTeX on save
+(add-hook 'LaTeX-mode-hook
+          (lambda ()
+            (add-hook 'after-save-hook #'TeX-command-master nil t)))

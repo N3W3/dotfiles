@@ -32,3 +32,15 @@
 ;; (unpin! t)
 
 (load! "packages/auctex.el")
+
+;;Xelatex compiling with shell-escape
+(after! latex
+  ;; define a new compile command that includes --shell-escape
+  (add-to-list 'TeX-command-list
+               '("XeLaTeX-shell-escape"
+                 "xelatex -shell-escape %s" TeX-run-TeX nil t
+                 :help "Run XeLaTeX with --shell-escape"))
+  ;; make it the default
+  (setq TeX-command-default "XeLaTeX-shell-escape"
+        TeX-engine 'xetex
+        TeX-PDF-mode t))
