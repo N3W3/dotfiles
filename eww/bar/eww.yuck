@@ -45,12 +45,18 @@
                            :class "bar-volume-icon"
                 (image :path "images/volume_high.svg"
                        :image-width 24
-                       :image-height 24))))))
+                       :image-height 24)))))
 
 ;;-----------------Widget Arch Icon-------------
+(defwidget arch []
+    (eventbox :hover ""
+    (box      :orientation "h"
+              :space-evenly "false"
+    (image    :path "images/arch.svg"
+              :image-width 24
+              :image-height 24))))
 
-;;-----------------Widgets Recherche-----------------
-
+;;----------------Widget Reduced app------------
 
 ;;-----------------Widgets -----------------
 
@@ -81,6 +87,7 @@
 
         (box :orientation "h" :space-evenly false :halign "end"
              (volume)
+             (arch)
         )
 
     )
@@ -100,6 +107,7 @@
 
         (box :orientation "h" :space-evenly false :halign "end"
              (volume)
+             (arch)
         )
 
     )
