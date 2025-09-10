@@ -3,6 +3,10 @@
 ;; Date time H:M
 (defpoll time :interval "5s" "date +%H:%M")
 
+;; Volume
+(defpoll volume :interval "1s" "./scripts/sound.sh") ;; Getting the current volume
+(defvar isVolumeSelect false) ;; is the cursor on the volume icon ?
+
 ;; Workspaces actives on différents monitors
 (defvar workspacesRight "" )
 (defvar workspacesLeft "" )
@@ -21,6 +25,30 @@
     (box :class "time"
     (label :text time)))
 
+;;-----------------Widget Sound----------------
+(defwidget volume []
+                (eventbox :onhover "./scripts/onHoverVolume.sh 1"
+                          :onhoverlost "./scripts/onHoverVolume.sh 0"
+                (box      :orientation "h"
+                          :space-evenly "false"
+                (revealer :transition "slideleft"
+                          :reveal isVolumeSelect
+                          :duration "500ms"
+                (scale    :class "bar-volume"
+                          :value volume
+                          :orientation "h"
+                          :flipped true
+                          :max 101
+                          :min 0
+                          :onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%"))
+                (button    :onclick "./scripts/open_pavucontrol.sh"
+                           :class "bar-volume-icon"
+                (image :path "images/volume_high.svg"
+                       :image-width 24
+                       :image-height 24))))))
+
+;;-----------------Widget Arch Icon-------------
+
 ;;-----------------Widgets Recherche-----------------
 
 
@@ -38,19 +66,6 @@
     :class "left"
     (workspacesMonitor1)))
 
-;;-----------------Widget CenterBar-----------------
-(defwidget centerBar []
-  (box
-    :class "center"
-    (dateTime)))
-
-;;-----------------Widget RigthBar-----------------
-
-(defwidget rightBar []
-  (box
-    :class "right"
-    ))
-
 ;;-----------------Widget bar-----------------
 
 (defwidget bar0 []
@@ -65,6 +80,7 @@
         )
 
         (box :orientation "h" :space-evenly false :halign "end"
+             (volume)
         )
 
     )
@@ -83,6 +99,7 @@
         )
 
         (box :orientation "h" :space-evenly false :halign "end"
+             (volume)
         )
 
     )

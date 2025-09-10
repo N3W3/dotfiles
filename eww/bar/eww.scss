@@ -1,8 +1,33 @@
+
+// Color Palette
+$background: rgba(14, 21, 40, 0.7);
+$section: rgba(0, 64, 93, 0.7);
+$foreground: #A9B1D6;
+
+$black: #24283B;
+$gray: #565F89;
+$red: #F7768E;
+$green: #73DACA;
+$yellow: #E0AF68;
+$blue: #7AA2F7;
+$magenta: #BB9AF7;
+$cyan: #7DCFFF;
+$white: $foreground;
+
 * {
   all: unset;
 }
 
+.bar-widget{
+    background-color: $background;
+
+}
+
 .barRight{
+    background-color: transparent;
+}
+
+.barLeft{
     background-color: transparent;
 }
 
@@ -12,7 +37,7 @@
     border: 1px solid transparent;
 
     &.isActive{
-      background-color: grey;
+      background-color: $gray;
     }
 
     &:hover{
@@ -24,4 +49,26 @@
   image {
     background-color: transparent;
   }
+}
+
+
+trough highlight {
+  background-image: linear-gradient(to right, #8FBCBB 30%, #88C0D0 50%, #81A1C1 100% *50);
+  border-radius: 4px;
+}
+
+scale trough {
+  all: unset;
+  background-color: #2E3440;
+  box-shadow: 0 1px 2px 1px #06060b;
+  border-radius: 9px;
+  min-height: 8px;
+  min-width: 70px;
+  margin: 0px 10px 0px 5px;
+}
+
+slider{
+  border-radius: 10px;
+  background-color: #D8DEE9;
+  margin: -7px -7px -7px -7px;
 }
