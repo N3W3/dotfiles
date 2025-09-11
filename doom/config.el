@@ -12,7 +12,7 @@
         TeX-PDF-mode t
         TeX-command-default "XeLaTeX"
         TeX-save-query nil      ;; auto-save buffers before compiling
-        TeX-show-compilation t) ;; show compilation buffer
+        TeX-show-compilation nil) ;; show compilation buffer
 
   ;; Add XeLaTeX to command list
   (add-to-list 'TeX-command-list
@@ -27,3 +27,10 @@
 (map! :leader
       :desc "Focus Treemacs"
       "p t" #'treemacs-select-window)
+
+;; Configure Discord Rich Presence
+(add-hook 'find-file-hook
+          (lambda ()
+            (require 'elcord nil 'noerror)
+            (when (fboundp 'elcord-mode)
+              (elcord-mode 1))))

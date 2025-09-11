@@ -44,3 +44,7 @@
   (setq TeX-command-default "XeLaTeX-shell-escape"
         TeX-engine 'xetex
         TeX-PDF-mode t))
+
+;; Adding discord rich presence
+(package! elcord
+  :recipe (:local-repo "packages/elcord"))
