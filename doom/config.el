@@ -1,5 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-dracula)
 (setq display-line-numbers-type t)
 (setq org-directory "~/org/")
 
@@ -34,3 +34,4 @@
             (require 'elcord nil 'noerror)
             (when (fboundp 'elcord-mode)
               (elcord-mode 1))))
+
