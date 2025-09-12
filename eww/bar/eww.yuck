@@ -3,8 +3,14 @@
 ;; Date time H:M
 (defpoll time :interval "5s" "date +%H:%M")
 
+;; Performances
+(defvar isPerfomanceSelect false)
+
+;; Settings
+(defvar isSettingsSelect false)
+
 ;; Volume
-(defpoll volume :interval "1s" "./scripts/sound.sh") ;; Getting the current volume
+(defpoll volume :interval "1s" "./scripts/sound/sound.sh") ;; Getting the current volume
 (defvar isVolumeSelect false) ;; is the cursor on the volume icon ?
 
 ;; Workspaces actives on différents monitors
@@ -25,10 +31,46 @@
     (box :class "time"
     (label :text time)))
 
+;;-----------------Widget Settings-------------
+(defwidget settings []
+          (eventbox       :onhover ""
+                          :onhoverlost ""
+          (box            :orientation "h"
+                          :space-evenly "false"
+          (revealer       :transition "crossfade"
+                          :reveal isSettingsSelect
+                          :duration "500ms"
+           )
+          (button         :onclick ""
+                          :class "bar-settings"
+          (image          :path "images/settings.svg"
+                          :image-width 20
+                          :image-height 20
+           ))))
+)
+
+;;----------------Widget Performances----------
+(defwidget performances []
+          (eventbox       :onhover ""
+                          :onhoverlost ""
+          (box            :orientation "h"
+                          :space-evenly "false"
+          (revealer       :transition "crossfade"
+                          :reveal isPerfomanceSelect
+                          :duration "500ms"
+           )
+          (button         :onclick ""
+                          :class "bar-perf"
+          (image          :path "images/performances.svg"
+                          :image-width 20
+                          :image-height 20
+           ))))
+)
+
 ;;-----------------Widget Sound----------------
 (defwidget volume []
-                (eventbox :onhover "./scripts/onHoverVolume.sh 1"
-                          :onhoverlost "./scripts/onHoverVolume.sh 0"
+                (eventbox :onhover "./scripts/sound/onHoverVolume.sh 1"
+                          :onhoverlost "./scripts/sound/onHoverVolume.sh 0"
                 (box      :orientation "h"
                           :space-evenly "false"
                 (revealer :transition "slideleft"
@@ -41,11 +83,13 @@
                           :max 101
                           :min 0
                           :onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%"))
-                (button    :onclick "./scripts/open_pavucontrol.sh"
+                (button    :onclick "./scripts/sound/open_pavucontrol.sh"
                            :class "bar-volume-icon"
                 (image :path "images/volume_high.svg"
-                       :image-width 24
-                       :image-height 24)))))
+                       :image-width 20
+                       :image-height 20))))
+)
+
 
 ;;-----------------Widget Arch Icon-------------
 (defwidget arch []
@@ -53,8 +97,8 @@
     (box      :orientation "h"
               :space-evenly "false"
     (image    :path "images/arch.svg"
-              :image-width 24
-              :image-height 24))))
+              :image-width 20
+              :image-height 20))))
 
 ;;----------------Widget Reduced app------------
 
@@ -86,6 +130,8 @@
         )
 
         (box :orientation "h" :space-evenly false :halign "end"
+             (performances)
+             (settings)
              (volume)
              (arch)
         )
@@ -106,6 +152,8 @@
         )
 
         (box :orientation "h" :space-evenly false :halign "end"
+             (performances)
+             (settings)
              (volume)
              (arch)
         )

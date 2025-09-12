@@ -20,7 +20,7 @@ workspaces() {
             isActive=false
         fi
 
-        icon="(image :path \"$HOME/.config/eww/bar/images/image${ws}.svg\" :image-width 24 :image-height 24)"
+        icon="(image :path \"$HOME/.config/eww/bar/images/image${ws}.svg\" :image-width 20 :image-height 20)"
 
         if $isActive; then
             buf+="(button :class \"isActive\" :onclick \"hyprctl dispatch workspace $ws\" $icon)"
