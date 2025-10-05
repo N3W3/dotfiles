@@ -52,3 +52,5 @@
 
 ;; Adding Yuck-mode Highlight
 (package! yuck-mode)
+
+(package! org-caldav)

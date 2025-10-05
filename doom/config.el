@@ -6,6 +6,14 @@
 ;; LaTeX settings
 (setq +latex-viewers '(zathura))
 
+(defun import-ical-at-start ()
+  (let* ((ics-file "~/Documents/organisation/univCal.ics")
+         (org-file "~/Documents/organisation/univCal.org"))
+    ;; Download the .ics file
+    (shell-command (concat "curl -s -o " ics-file " " my-univ-ical-url))
+    ;; Convert .ics -> .org
+    (shell-command (concat "icsorg -i "ics-file " -o " org-file))))
+
 (after! latex
   ;; XeLaTeX as default
   (setq TeX-engine 'xetex
@@ -34,4 +42,17 @@
             (require 'elcord nil 'noerror)
             (when (fboundp 'elcord-mode)
               (elcord-mode 1))))
+
+(after! org
+  ;; Load univ dateTime variables
+  (load! "private/private.el")
+  ;; Start function
+  (import-ical-at-start))
+
+(setq org-agenda-files '("~/Documents/organisation/agenda.org"
+                         "~/Documents/organisation/univCal.org"))
+(setq org-agenda-start-on-weekday nil) ;; Start agenda from today
+(setq org-agenda-span '10) ;; Show 10 days
+(setq org-agenda-show-all-dates t) ;; Show all dates
+
 
