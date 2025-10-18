@@ -46,8 +46,8 @@
         TeX-PDF-mode t))
 
 ;; Adding discord rich presence
-(package! elcord
-  :recipe (:local-repo "packages/elcord"))
+;;(package! elcord
+;;  :recipe (:local-repo "packages/elcord"))
 
 
 ;; Adding Yuck-mode Highlight

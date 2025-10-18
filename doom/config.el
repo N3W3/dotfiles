@@ -37,11 +37,11 @@
       "p t" #'treemacs-select-window)
 
 ;; Configure Discord Rich Presence
-(add-hook 'find-file-hook
-          (lambda ()
-            (require 'elcord nil 'noerror)
-            (when (fboundp 'elcord-mode)
-              (elcord-mode 1))))
+;;(add-hook 'find-file-hook
+;;         (lambda ()
+;;            (require 'elcord nil 'noerror)
+;;            (when (fboundp 'elcord-mode)
+;;              (elcord-mode 1))))
 
 (after! org
   ;; Load univ dateTime variables
