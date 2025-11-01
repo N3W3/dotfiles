@@ -54,3 +54,5 @@
 (package! yuck-mode)
 
 (package! org-caldav)
+
+(package! tidal)

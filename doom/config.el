@@ -55,4 +55,4 @@
 (setq org-agenda-span '10) ;; Show 10 days
 (setq org-agenda-show-all-dates t) ;; Show all dates
 
-
+(setq tidal-boot-script-path "/usr/share/haskell-tidal/BootTidal.hs")
