@@ -56,3 +56,6 @@
 (package! org-caldav)
 
 (package! tidal)
+
+(package! gptel)
+
