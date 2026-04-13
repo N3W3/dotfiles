@@ -7,47 +7,63 @@
 (load! "private/private.el")
 
 
-;; LaTeX settings
-(setq +latex-viewers '(zathura))
+;; ----- LaTeX configuration -----------------------------------
+;; Set up the pdf viewer
+(setq +latex-viewers '(zathura)) ;; Setup the pdf viewer
 
-(defun import-ical-at-start ()
-  (let* ((ics-file "~/Documents/organisation/univCal.ics")
-         (org-file "~/Documents/organisation/univCal.org"))
-    ;; Download the .ics file
-    (shell-command (concat "curl -s -o " ics-file " " my-univ-ical-url))
-    ;; Convert .ics -> .org
-    (shell-command (concat "icsorg -i "ics-file " -o " org-file))))
+;; Run LaTeX configuration after the latex package has been loaded
+(after! latex 
+  ;; Set XeLaTeX as the default TeX engine
+  (setq TeX-engine 'xetex 
+        ;; Enable PDF mode
+        TeX-PDF-mode t 
+        ;; Set the default TeX command
+        TeX-command-default "XeLaTeX" 
+        ;; Auto-save buffers before compiling
+        TeX-save-query nil      
+        ;; Do not show the compilation buffer
+        TeX-show-compilation nil) ;; Show compilation buffer
 
-(after! latex
-  ;; XeLaTeX as default
-  (setq TeX-engine 'xetex
-        TeX-PDF-mode t
-        TeX-command-default "XeLaTeX"
-        TeX-save-query nil      ;; auto-save buffers before compiling
-        TeX-show-compilation nil) ;; show compilation buffer
-
-  ;; Add XeLaTeX to command list
-  (add-to-list 'TeX-command-list
-               '("XeLaTeX"
-                 "xelatex -interaction=nonstopmode -shell-escape %s"
-                 TeX-run-TeX nil t
+  ;; Add XeLaTeX to the list of available TeX commands
+  (add-to-list 'TeX-command-list 
+               ;; Define a new TeX command for XeLaTeX
+               '("XeLaTeX" 
+                 ;; Command to run XeLaTeX
+                 "xelatex -interaction=nonstopmode -shell-escape %s" 
+                 ;; Function to run the TeX command
+                 TeX-run-TeX 
+                 ;; Do not add the command to the TeX menu
+                 nil 
+                 ;; Add the command to the TeX menu
+                 t 
+                 ;; Help text for the command
                  :help "Run XeLaTeX")))
 
+;; Xelatex compiling with shell-escape
+;; Run LaTeX configuration after the latex package has been loaded
+(after! latex 
+  ;; Define a new compile command that includes --shell-escape
+  (add-to-list 'TeX-command-list 
+               ;; Define a new TeX command for XeLaTeX with shell-escape
+               '("XeLaTeX-shell-escape" 
+                 ;; Command to run XeLaTeX with shell-escape
+                 "xelatex -shell-escape %s" 
+                 ;; Function to run the TeX command
+                 TeX-run-TeX 
+                 ;; Do not add the command to the TeX menu
+                 nil 
+                 ;; Add the command to the TeX menu
+                 t 
+                 ;; Help text for the command
+                 :help "Run XeLaTeX with --shell-escape"))
+  ;; Make the XeLaTeX-shell-escape command the default
+  (setq TeX-command-default "XeLaTeX-shell-escape" 
+        ;; Set XeLaTeX as the default TeX engine
+        TeX-engine 'xetex 
+        ;; Enable PDF mode
+        TeX-PDF-mode t))
 
-(after! org
-  ;; Start function
-  (import-ical-at-start))
-
-(setq org-agenda-files '("~/Documents/organisation/agenda.org"
-                         "~/Documents/organisation/univCal.org"))
-(setq org-agenda-start-on-weekday nil) ;; Start agenda from today
-(setq org-agenda-span '10) ;; Show 10 days
-(setq org-agenda-show-all-dates t) ;; Show all dates
-
-(setq tidal-boot-script-path "/usr/share/haskell-tidal/BootTidal.hs")
-
-;; gptel config
-;; Configuration du package gptel
+;;----- Gptel package configuration -----------------------------------
 (use-package! gptel
   :config
   ;; 1. Moteur Ollama (Local/Cloud gratuit)
@@ -55,7 +71,7 @@
         (gptel-make-ollama "Ollama"
           :host "localhost:11434"
           :stream t
-          :models '("gemma4:latest")))
+          :models '("llama3.2:3b")))
 
   ;; 2. Moteur Groq (Le "gros cerveau" 70B gratuit)
   ;; Note : On utilise gptel-make-openai car Groq est compatible avec ce format
@@ -73,19 +89,5 @@
   (setq gptel-backend gptel-groq-backend
         gptel-model "llama-3.3-70b-versatile"))
 
-
-;;Bindings
-
-;; Select the treemacs window
-(map! :leader
-      :desc "Focus Treemacs"
-      "p t" #'treemacs-select-window)
-
-;; Keymaps (tes raccourcis sont parfaits, j'ai juste harmonisé l'alignement)
-(map! :leader
-      (:prefix ("l" . "ai")
-       :desc "Ouvrir le chat"      "g" #'gptel
-       :desc "Menu de config"      "m" #'gptel-menu
-       :desc "Réécrire la région"  "r" #'gptel-rewrite
-       :desc "Ajouter au contexte" "a" #'gptel-add))
-
+;;----- Load at end -----------------------------------
+(load! "map/map.el")

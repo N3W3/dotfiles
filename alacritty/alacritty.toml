@@ -1,0 +1,24 @@
+[window]
+
+dimensions = {columns = 120, lines = 30}
+
+opacity = 0.9
+
+decorations = "None"
+
+blur = true
+
+[terminal]
+shell = "zsh" 
+
+[font]
+normal.family = "JetBrainsMono Nerd Font"
+size = 15
+
+[keyboard]
+
+bindings = [
+{key = "c", mods ="Control", action = "Copy"},
+{key = "v", mods = "Control", action = "Paste"},
+]
+
